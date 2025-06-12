@@ -24,8 +24,7 @@ const UsersPage: React.FC<UsersPageProps> = ({ users }) => {
   );
 };
 
-// ✅ This must be exported from the page file
-export const getStaticProps = async () => {
+export async function getStaticProps() {
   const res = await fetch("https://jsonplaceholder.typicode.com/users");
   const data = await res.json();
 
@@ -41,8 +40,6 @@ export const getStaticProps = async () => {
       users,
     },
   };
-};
-
+}
 export default UsersPage;
-// This page fetches user data from an API and displays it using the UserCard component.
-// It uses getStaticProps to fetch data at build time, ensuring fast page loads and SEO optimization.
+// This code defines a Next.js page that fetches user data from an API and displays it using a UserCard component.  
