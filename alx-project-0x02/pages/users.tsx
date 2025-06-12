@@ -13,7 +13,7 @@ const UsersPage: React.FC<UsersPageProps> = ({ users }) => {
     <>
       <Header />
       <main className="min-h-screen bg-gray-100 p-6">
-        <h1 className="text-3xl font-bold text-black text-center mb-8">Our Users</h1>
+        <h1 className="text-3xl font-bold text-black text-center mb-8">User Directory</h1>
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {users.map((user) => (
             <UserCard key={user.id} {...user} />
@@ -24,6 +24,7 @@ const UsersPage: React.FC<UsersPageProps> = ({ users }) => {
   );
 };
 
+// ✅ This must be exported from the page file
 export const getStaticProps = async () => {
   const res = await fetch("https://jsonplaceholder.typicode.com/users");
   const data = await res.json();
@@ -36,10 +37,12 @@ export const getStaticProps = async () => {
   }));
 
   return {
-    props: { users },
+    props: {
+      users,
+    },
   };
 };
 
 export default UsersPage;
-// This code defines a Next.js page that fetches user data from an API and displays it using a UserCard component.
-// It uses TypeScript for type safety and Tailwind CSS for styling. 
+// This page fetches user data from an API and displays it using the UserCard component.
+// It uses getStaticProps to fetch data at build time, ensuring fast page loads and SEO optimization.
