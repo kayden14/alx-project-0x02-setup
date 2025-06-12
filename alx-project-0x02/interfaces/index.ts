@@ -9,11 +9,6 @@ export interface HeaderProps {
 export interface FooterProps {
   text: string;
 }
-export interface ButtonProps {
-  label: string;
-  onClick: () => void;
-  disabled?: boolean;
-}
 export interface InputProps {
   type: string;
   placeholder: string;
@@ -37,4 +32,11 @@ export interface PaginationProps {
   currentPage: number;
   totalPages: number;
   onPageChange: (page: number) => void;
+}
+// interfaces/index.ts
+export interface ButtonProps {
+  label: string;
+  size?: "small" | "medium" | "large";
+  shape?: "rounded-sm" | "rounded-md" | "rounded-full";
+  onClick?: () => void;
 }
