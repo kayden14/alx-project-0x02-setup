@@ -48,6 +48,7 @@ export interface PostProps {
 }
 // Add to interfaces/index.ts
 export interface UserProps {
+  id: number;
   name: string;
   email: string;
   address: {
