@@ -40,3 +40,18 @@ export interface ButtonProps {
   shape?: "rounded-sm" | "rounded-md" | "rounded-full";
   onClick?: () => void;
 }
+// interfaces/index.ts
+export interface PostProps {
+  title: string;
+  content: string;
+  userId: number;
+}
+// Add to interfaces/index.ts
+export interface UserProps {
+  name: string;
+  email: string;
+  address: {
+    street: string;
+    city: string;
+  };
+}

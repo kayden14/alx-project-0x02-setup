@@ -1,18 +1,42 @@
 // pages/posts.tsx
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Header from "@/components/layout/Header";
+import PostCard from "@/components/common/PostCard";
+import { type PostProps } from "@/interfaces";
 
 const PostsPage = () => {
+  const [posts, setPosts] = useState<PostProps[]>([]);
+
+  useEffect(() => {
+    const fetchPosts = async () => {
+      const res = await fetch("https://jsonplaceholder.typicode.com/posts?_limit=6");
+      const data = await res.json();
+      const formatted = data.map((post: any) => ({
+        title: post.title,
+        content: post.body,
+        userId: post.userId,
+      }));
+      setPosts(formatted);
+    };
+
+    fetchPosts();
+  }, []);
+
   return (
     <>
       <Header />
-      <div className="min-h-screen flex items-center justify-center bg-gray-100">
-        <h1 className="text-4xl font-bold text-black">All Posts Coming Soon</h1>
+      <div className="min-h-screen bg-gray-100 p-6">
+        <h1 className="text-3xl font-bold text-black text-center mb-8">Posts</h1>
+        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          {posts.map((post, index) => (
+            <PostCard key={index} {...post} />
+          ))}
+        </div>
       </div>
     </>
   );
 };
 
 export default PostsPage;
-// This is a placeholder for the Posts page in a Next.js application.
-// It includes a header and a message indicating that posts will be available soon.
+// This code defines a Next.js page that fetches and displays posts from an API.
+// It uses React hooks to manage state and side effects, and it renders a header and a grid of post cards.
